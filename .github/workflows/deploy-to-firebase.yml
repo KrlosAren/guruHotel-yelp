@@ -9,8 +9,10 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: npm install
+      - name: Buld DLL
+        run: npm run build:dll
       - name: Build
-        run: npm run build
+        run: npm run build:prod
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
