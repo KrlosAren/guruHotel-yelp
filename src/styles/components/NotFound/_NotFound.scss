@@ -1,0 +1,23 @@
+.notFound {
+  @include center-items;
+
+  color: $color-secondary;
+  flex-direction: column;
+  font-family: $font-mukta;
+  height: 100vh;
+
+  p:first-of-type {
+    font-size: $font-24 + 10;
+  }
+
+  p:last-of-type {
+    font-size: $font-24;
+  }
+
+  a {
+    @include button;
+
+    background-color: $color-primary;
+    margin-top: $em * 2;
+  }
+}

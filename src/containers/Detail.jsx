@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaMapMarkerAlt, FaMoneyBillAlt, FaPhoneAlt } from 'react-icons/fa';
+import { MdSchedule } from 'react-icons/md';
 import Rating from '../components/Rating';
 import Review from '../components/Review';
 import Hours from '../components/Hours';
@@ -54,16 +55,21 @@ const Detail = () => {
                 </div>
               </div>
               <div className='info__hours'>
-                {hours[0].open.map((hour) => (
-                  <Hours hour={hour} />
-                ))}
+                <MdSchedule />
+                {hours[0]
+                  ? hours[0].open.map((hour) => <Hours hour={hour} />)
+                  : 'Not Info'}
               </div>
               <div className='info__open'>
                 <span>Status:</span>
-                {hours[0].is_open_now ? (
-                  <span>Open</span>
+                {hours[0] ? (
+                  hours[0].is_open_now ? (
+                    <span>Open</span>
+                  ) : (
+                    <span style={{ color: '#ec4646' }}>Closed</span>
+                  )
                 ) : (
-                  <span style={{ color: '#ec4646' }}>Closed</span>
+                  <span>Not Info</span>
                 )}
               </div>
               <Link to='/' className='button-back'>

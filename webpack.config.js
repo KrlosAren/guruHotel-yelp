@@ -77,7 +77,7 @@ module.exports = {
       cleanOnceBeforeBuildPatterns: ['**/bundle.*'],
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: './src/styles/assets/favicon-01.ico', to: 'assets' }],
+      patterns: [{ from: './src/styles/assets/favicon-01.ico', to: 'assets/' }],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -91,7 +91,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 4000,
+    port: 3500,
     historyApiFallback: true,
   },
   optimization: {

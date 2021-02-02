@@ -917,12 +917,5 @@
       "display_phone": "(415) 769-8109",
       "distance": 199.81617618665948
     }
-  ],
-  "total": 772,
-  "region": {
-    "center": {
-      "longitude": -122.399972,
-      "latitude": 37.786882
-    }
-  }
+  ]
 }

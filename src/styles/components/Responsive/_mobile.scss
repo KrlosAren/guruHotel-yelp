@@ -1,6 +1,6 @@
 @media only screen and (max-width: 600px) {
   .container {
-    padding: 0 $em * 2;
+    padding: 0 $em;
   }
 
   .home {
@@ -18,6 +18,16 @@
   .menu__search {
     grid-column: 1/-1;
     grid-row: 2/-1;
+    position: relative;
+
+    &::before {
+      background-color: #fff;
+      content: '';
+      height: 100px;
+      position: absolute;
+      width: 100%;
+      z-index: -10;
+    }
   }
 
   .menu__logo {
@@ -64,5 +74,14 @@
 
   .detail-layout {
     margin-top: $em * 10;
+  }
+
+  .grid__container {
+    grid-template-columns: 1fr;
+  }
+
+  .home-with-search {
+    grid-column: 1/-1;
+    margin-top: $em * 18;
   }
 }

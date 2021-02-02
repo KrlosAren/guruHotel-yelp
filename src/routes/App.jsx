@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Layout from '../components/Layout';
 // components
-import { Home, Detail } from '../containers/index';
+import { Home, Detail, NotFound } from '../containers/index';
 
 // styles
 import '../styles/index.scss';
@@ -14,6 +14,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/detail/:id' component={Detail} />
+          <Route component={NotFound} />
         </Switch>
       </Layout>
     </BrowserRouter>

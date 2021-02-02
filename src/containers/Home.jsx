@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 // components
@@ -8,7 +8,7 @@ import Spinner from '../components/Spinner';
 
 const Home = () => {
   const { user } = useSelector((state) => state);
-  const { results, error, isError, isLoading } = user;
+  const { results, isError, isLoading } = user;
   const isResults = results.length > 0;
 
   if (isLoading) {
@@ -24,8 +24,9 @@ const Home = () => {
           </div>
         )}
         {isResults && <GridItems />}
-        {/* {!isResults && <div>No hay resultados</div>} */}
-        <div className='errors'>{error && <span>{error}</span>}</div>
+        <ul className='errors' id='msg'>
+          {isError && <li>😅 Something has happened !. Try again!</li>}
+        </ul>
       </div>
     </div>
   );
