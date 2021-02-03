@@ -2,6 +2,7 @@
   background-color: $color-aux;
   display: grid;
   grid-column: 2/-2;
+  height: $h-100;
   width: $w-100;
 
   &__logo {

@@ -23,7 +23,7 @@ const Search = () => {
     };
 
     dispatch(fetchSearch(query));
-    localStorage.clear();
+    // localStorage.clear();
 
     // push to client to / when the user fetch from detail page
     if (pathname !== '/') {

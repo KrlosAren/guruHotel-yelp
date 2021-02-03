@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaMapMarkerAlt, FaMoneyBillAlt, FaPhoneAlt } from 'react-icons/fa';
 import { MdSchedule } from 'react-icons/md';
@@ -7,17 +7,19 @@ import Rating from '../components/Rating';
 import Review from '../components/Review';
 import Hours from '../components/Hours';
 import { saveView } from '../store/user';
+import handleErrorImg from '../utils/utils';
 
 const Detail = () => {
+  const dispatch = useDispatch();
   const { alias } = useParams();
+
   const { results } = useSelector((state) => state.user);
 
   const item = results.find((business) => business.alias === alias);
 
-  // dispatch();
-
   const history = useHistory();
   const {
+    id,
     name,
     rating,
     price,
@@ -29,12 +31,20 @@ const Detail = () => {
     reviews,
   } = item;
 
+  useEffect(() => {
+    dispatch(saveView(id));
+  }, [id]);
+
+  const info = {
+    height: hours && 'auto',
+  };
+
   return (
     <div className='container'>
       <div className='detail-layout'>
         <div className='detail__card'>
           <div className='detail__card--img'>
-            <img src={photos} alt={name} />
+            <img src={photos} alt={name} onError={handleErrorImg} />
           </div>
           <div className='detail__card--info'>
             <h1>{name}</h1>
@@ -42,7 +52,7 @@ const Detail = () => {
               <Rating value={rating} />
               <span>{review_count} reviews</span>
             </div>
-            <div className='card-info_hours'>
+            <div className='card-info_hours' style={info}>
               <p className='info__price'>
                 <FaMoneyBillAlt size={20} style={{ color: '#ff5a29' }} />
                 <span>{price || 'Not info'}</span>
@@ -62,9 +72,11 @@ const Detail = () => {
                   <MdSchedule size={20} style={{ color: '#ff5a29' }} />
                   <span>Schedules</span>
                 </div>
-                {hours[0]
-                  ? hours[0].open.map((hour) => <Hours hour={hour} />)
-                  : 'Not Info'}
+                {hours[0] ? (
+                  hours[0].open.map((hour) => <Hours hour={hour} />)
+                ) : (
+                  <p>Not Info</p>
+                )}
               </div>
               <div className='info__open'>
                 <span>Status:</span>
@@ -75,12 +87,15 @@ const Detail = () => {
                     <span style={{ color: '#ec4646' }}>Closed</span>
                   )
                 ) : (
-                  <span>Not Info</span>
+                  <span style={{ height: 'initial' }}>Not Info</span>
                 )}
               </div>
               <p
                 onClick={() => {
                   history.push('/');
+                  useDispatch(() => {
+                    saveView(alias);
+                  });
                 }}
                 className='button-back'
               >

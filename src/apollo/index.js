@@ -5,11 +5,14 @@ const API_KEY =
 
 const client = new ApolloClient({
   uri: 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/graphql',
+  // uri: 'https://api.yelp.com/v3/graphql',
   cache: new InMemoryCache(),
   credentials: 'same-origin',
   headers: {
     Authorization: `Bearer ${API_KEY}`,
+    'Content-type': 'application/graphql',
     'Accept-Language': 'en_US',
+    'Access-Control-Allow-Origin': '*',
   },
 });
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { AiFillEye } from 'react-icons/ai';
+import handleErrorImg from '../utils/utils';
 import Rating from './Rating';
 
 const CardItem = ({ data }) => {
@@ -15,16 +18,20 @@ const CardItem = ({ data }) => {
     location,
   } = data;
 
+  const { views } = useSelector((state) => state.user);
+  const isView = views.includes(id);
+
   return (
     <div className='card__item'>
       <div className='card__item--img'>
-        <img src={photos} alt={name} />
+        <img src={photos} alt={name} onError={handleErrorImg} />
       </div>
       <div className='card__item--info'>
         <h2>{name}</h2>
         <div className='card__item--review'>
           <Rating value={rating} />
           <span>{review_count} reviews</span>
+          {isView && <AiFillEye size={25} color='#ff5a29' />}
         </div>
         <p>
           <FaPhoneAlt color='#ff5a29' />
@@ -34,11 +41,7 @@ const CardItem = ({ data }) => {
           <FaMapMarkerAlt color='#ff5a29' />
           <span>{location.formatted_address}</span>
         </p>
-        <Link
-          type='button'
-          to={`/detail/${alias}`}
-          className='card__item--button'
-        >
+        <Link to={`/detail/${alias}`} className='card__item--button'>
           View More...
         </Link>
       </div>

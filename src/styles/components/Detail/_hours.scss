@@ -7,6 +7,10 @@
   justify-content: center;
   margin-top: $em * 0.25;
   width: $w-100;
+
+  p {
+    color: $color-secondary;
+  }
 }
 
 .hour {
