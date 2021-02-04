@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[fullhash].js',
-    publicPath: dev === 'dev' ? 'http://localhost:3001' : 'dist/',
+    publicPath: dev === 'dev' ? 'http://localhost:3001' : 'dist',
     chunkFilename: 'js/[id].[chunkhash].js',
   },
   optimization: {

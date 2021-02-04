@@ -8,7 +8,7 @@
   }
 
   .search {
-    padding: 0;
+    padding: 0 $em;
 
     button[type='submit'] {
       width: $em * 6;
@@ -19,6 +19,7 @@
     grid-column: 1/-1;
     grid-row: 2/-1;
     position: relative;
+    width: $w-100 + 10;
 
     &::before {
       background-color: #fff;

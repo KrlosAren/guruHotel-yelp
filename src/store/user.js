@@ -5,7 +5,7 @@ export const fetchSearch = createAsyncThunk(
   'users/fetchData',
   async (query) => {
     const response = await getData(query);
-    return response.data.search.business;
+    return response.data.search;
   }
 );
 
@@ -13,31 +13,28 @@ export const fetchSearch = createAsyncThunk(
 const slice = createSlice({
   name: 'users',
   initialState: {
+    total: null,
     results: [],
     views: [],
-    error: [],
+    error: false,
     isError: false,
     isLoading: false,
   },
   reducers: {
     saveView: (state, { payload }) => ({
-      favorites: [...state.views, payload],
-    }),
-    addData: (state, { payload }) => ({
       ...state,
-      results: payload,
-      isError: null,
-      isLoading: false,
+      views: [...state.views, payload],
     }),
     setError: (state, { payload }) => ({
       ...state,
-      error: [...state.error, payload],
+      error: payload,
       isError: true,
-      isLoading: false,
     }),
     emptyErrors: (state, { payload }) => ({
       ...state,
       error: payload,
+      isError: false,
+      total: null,
     }),
   },
   extraReducers: {
@@ -48,14 +45,15 @@ const slice = createSlice({
     }),
     [fetchSearch.fulfilled]: (state, { payload }) => ({
       ...state,
-      results: [...payload],
+      total: payload.total,
+      results: [...payload.business],
       isLoading: false,
       error: false,
     }),
     [fetchSearch.rejected]: (state, action) => ({
       ...state,
       isError: true,
-      error: [...state.error, action.error.message],
+      error: action.error.message,
       isLoading: false,
     }),
   },
@@ -64,4 +62,4 @@ const slice = createSlice({
 export default slice.reducer;
 
 // actions
-export const { saveView, addData, setError, emptyErrors } = slice.actions;
+export const { saveView, setError, emptyErrors } = slice.actions;
