@@ -16,10 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[fullhash].js',
-    publicPath:
-      dev === 'dev'
-        ? 'http://localhost:3001'
-        : 'https://krlosaren.github.io/urban-eatery/',
+    publicPath: dev === 'dev' ? 'http://localhost:3001' : 'dist',
     chunkFilename: 'js/[id].[chunkhash].js',
   },
   optimization: {
@@ -90,10 +87,7 @@ module.exports = {
       {
         filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
         outputPath: 'js',
-        publicPath:
-          dev === 'dev'
-            ? 'http://localhost:3001/js'
-            : 'https://krlosaren.github.io/urban-eatery/js',
+        publicPath: dev === 'dev' ? 'http://localhost:3001/js' : 'dist/js',
       },
     ]),
     new CleanWebpackPlugin({
